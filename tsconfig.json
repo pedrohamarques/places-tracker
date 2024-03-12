@@ -8,7 +8,8 @@
          "@components/*": ["./src/components/*"],
          "@models/*": ["./src/models/*"],
          "@typings/*": ["./src/typings/*"],
-         "@routes/*": ["./src/routes/*"]
+         "@routes/*": ["./src/routes/*"],
+         "@constants/*": ["./src/constants/*"]
       }
    }
 }
