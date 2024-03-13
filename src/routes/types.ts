@@ -4,7 +4,10 @@ export type RoutesParams = {
       pickedLat: number;
       pickedLng: number;
    };
-   [StackRoutes.MAP]: undefined;
+   [StackRoutes.MAP]?: {
+      initialLat: number;
+      initialLng: number;
+   };
    [StackRoutes.PLACE_DETAILS]: {
       placeId: number;
    };

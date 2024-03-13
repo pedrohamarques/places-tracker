@@ -36,13 +36,19 @@ export function Routes() {
                   title: 'Add a new place',
                }}
             />
-            <Stack.Screen name={StackRoutes.MAP} component={MapScreen} />
+            <Stack.Screen
+               name={StackRoutes.MAP}
+               component={MapScreen}
+               options={{
+                  headerBackTitleVisible: false,
+               }}
+            />
             <Stack.Screen
                name={StackRoutes.PLACE_DETAILS}
                component={PlaceDetailsScreen}
                options={{
                   title: 'Loading place...',
-                  headerBackVisible: false,
+                  headerBackTitleVisible: false,
                }}
             />
          </Stack.Navigator>
