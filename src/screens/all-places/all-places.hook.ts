@@ -1,34 +1,36 @@
 import { useEffect, useState } from 'react';
-import {
-   RouteProp,
-   useIsFocused,
-   useNavigation,
-   useRoute,
-} from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+
+import { useDatabaseServices } from '@services/database';
 
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { type RoutesParams, StackRoutes } from '@routes/types';
-import Place from '@models/place';
+import { FetchedFormattedPlaceProps } from '@typings/data';
 
 export function useAllPlacesScreen() {
    const isFocused = useIsFocused();
    const navigation = useNavigation<NativeStackNavigationProp<RoutesParams>>();
-   const route = useRoute<RouteProp<RoutesParams, StackRoutes.ALL_PLACES>>();
 
-   const [loadedPlaces, setLoadedPlaces] = useState<Place[]>([]);
+   const { fetchPlaces } = useDatabaseServices();
+
+   const [loadedPlaces, setLoadedPlaces] = useState<
+      FetchedFormattedPlaceProps[]
+   >([]);
 
    function headerButtonHandler() {
       navigation.navigate(StackRoutes.ADD_PLACES);
    }
 
    useEffect(() => {
-      if (isFocused && route.params) {
-         setLoadedPlaces(currentPlaces => [
-            ...currentPlaces,
-            route.params.place,
-         ]);
+      async function loadPlaces() {
+         const places = await fetchPlaces();
+         setLoadedPlaces(places);
       }
-   }, [isFocused, route]);
+
+      if (isFocused) {
+         loadPlaces();
+      }
+   }, [isFocused]);
 
    return {
       headerButtonHandler,
