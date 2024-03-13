@@ -1,7 +1,11 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { usePlaceForm } from './place-form.hook';
+
 import { Colors } from '@constants/colors';
+
+import { ImagePicker } from '@components/image-picker';
+
+import { usePlaceForm } from './place-form.hook';
 
 export function PlaceForm() {
    const { changeTitleHandler, enteredTitle } = usePlaceForm();
@@ -15,6 +19,7 @@ export function PlaceForm() {
                style={styles.input}
             />
          </View>
+         <ImagePicker />
       </ScrollView>
    );
 }
