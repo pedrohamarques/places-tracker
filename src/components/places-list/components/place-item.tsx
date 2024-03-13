@@ -1,12 +1,11 @@
 import React from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
-import type Place from '@models/place';
 import { Colors } from '@constants/colors';
-import { formatAddress } from '@utils/location';
+import { FetchedFormattedPlaceProps } from '@typings/data';
 
 type PlaceItemProps = {
-   place: Place;
+   place: FetchedFormattedPlaceProps;
    onSelect: () => void;
 };
 
@@ -18,9 +17,7 @@ export function PlaceItem({ place, onSelect }: PlaceItemProps) {
          <Image source={{ uri: place.imageUri }} style={styles.image} />
          <View style={styles.info}>
             <Text style={styles.title}>{place.title}</Text>
-            <Text style={styles.address}>
-               {formatAddress(place.location?.address)}
-            </Text>
+            <Text style={styles.address}>{place.location?.address}</Text>
          </View>
       </Pressable>
    );
@@ -49,7 +46,7 @@ const styles = StyleSheet.create({
       height: 100,
    },
    info: {
-      flex: 6,
+      flex: 2,
       padding: 12,
    },
    title: {

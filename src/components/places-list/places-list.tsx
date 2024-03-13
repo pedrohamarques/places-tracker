@@ -5,10 +5,10 @@ import { Colors } from '@constants/colors';
 
 import { PlaceItem } from './components';
 
-import type Place from '@models/place';
+import { FetchedFormattedPlaceProps } from '@typings/data';
 
 type PlacesListProps = {
-   places: Place[];
+   places: FetchedFormattedPlaceProps[];
 };
 
 export function PlacesList({ places }: PlacesListProps) {
@@ -26,7 +26,7 @@ export function PlacesList({ places }: PlacesListProps) {
       <FlatList
          style={styles.list}
          data={places}
-         keyExtractor={item => item.id}
+         keyExtractor={item => String(item.id)}
          renderItem={({ item }) => (
             <PlaceItem place={item} onSelect={() => {}} />
          )}
