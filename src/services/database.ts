@@ -3,7 +3,7 @@ import * as SQLite from 'expo-sqlite';
 import { formatAddress } from '@utils/location';
 
 import Place from '@models/place';
-import { FetchedFormattedPlaceProps } from '@typings/data';
+import { FetchedFormattedPlaceProps, PlaceDetailsProps } from '@typings/data';
 
 const database = SQLite.openDatabase('places.db');
 
@@ -96,9 +96,31 @@ export function useDatabaseServices() {
       return promise;
    }
 
+   function fetchPlaceDetails(id: number) {
+      const promise = new Promise<PlaceDetailsProps>((resolve, reject) => {
+         database.transaction(transactionObject => {
+            transactionObject.executeSql(
+               `SELECT * FROM places WHERE id = ?`,
+               [id],
+               (_, result) => {
+                  const place: PlaceDetailsProps = result.rows._array[0];
+
+                  resolve(place);
+               },
+               (_, error) => {
+                  reject(error);
+                  return false;
+               },
+            );
+         });
+      });
+      return promise;
+   }
+
    return {
       init,
       insertPlace,
       fetchPlaces,
+      fetchPlaceDetails,
    };
 }
