@@ -1,6 +1,10 @@
 import React from 'react';
 import { PlaceForm } from '@components/place-form';
 
+import { useAddPlaceScreen } from './add-place.hook';
+
 export function AddPlaceScreen() {
-   return <PlaceForm />;
+   const { createPlaceHandler } = useAddPlaceScreen();
+
+   return <PlaceForm onCreatePlace={createPlaceHandler} />;
 }

@@ -9,14 +9,20 @@ import { Button } from '@components/ui/button';
 
 import { usePlaceForm } from './place-form.hook';
 
-export function PlaceForm() {
+import type Place from '@models/place';
+
+type PlaceFormProps = {
+   onCreatePlace: (data: Place) => void;
+};
+
+export function PlaceForm({ onCreatePlace }: PlaceFormProps) {
    const {
       changeTitleHandler,
       enteredTitle,
       takeImageHandler,
       takeLocationHandler,
       savePlaceHandler,
-   } = usePlaceForm();
+   } = usePlaceForm({ onCreatePlace });
    return (
       <ScrollView style={styles.form}>
          <View>

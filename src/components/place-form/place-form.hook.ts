@@ -1,10 +1,16 @@
 import { useCallback, useState } from 'react';
 
-import type { Location } from '@typings/data';
+import type { FullLocationProps } from '@typings/data';
+import Place from '@models/place';
 
-export function usePlaceForm() {
+type usePlaceFormProps = {
+   onCreatePlace: (data: Place) => void;
+};
+
+export function usePlaceForm({ onCreatePlace }: usePlaceFormProps) {
    const [enteredTitle, setEnteredTitle] = useState('');
-   const [pickedLocation, setPickedLocation] = useState<Location | null>(null);
+   const [pickedLocation, setPickedLocation] =
+      useState<FullLocationProps | null>(null);
    const [pickedImage, setPickedImage] = useState('');
 
    function changeTitleHandler(enteredText: string) {
@@ -12,16 +18,15 @@ export function usePlaceForm() {
    }
 
    function savePlaceHandler() {
-      console.log(enteredTitle);
-      console.log(pickedImage);
-      console.log(pickedLocation);
+      const placeData = new Place(enteredTitle, pickedImage, pickedLocation);
+      onCreatePlace(placeData);
    }
 
    function takeImageHandler(imageUri: string) {
       setPickedImage(imageUri);
    }
 
-   const takeLocationHandler = useCallback((location: Location) => {
+   const takeLocationHandler = useCallback((location: FullLocationProps) => {
       setPickedLocation(location);
    }, []);
 
