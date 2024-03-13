@@ -13,7 +13,8 @@ type AllPlacesScreenNavigationProps = {
 export function AllPlacesScreen({
    navigation,
 }: AllPlacesScreenNavigationProps) {
-   const { headerButtonHandler, loadedPlaces } = useAllPlacesScreen();
+   const { headerButtonHandler, placeSelectHandler, loadedPlaces } =
+      useAllPlacesScreen();
 
    useLayoutEffect(() => {
       navigation.setOptions({
@@ -28,5 +29,5 @@ export function AllPlacesScreen({
       });
    }, []);
 
-   return <PlacesList places={loadedPlaces} />;
+   return <PlacesList places={loadedPlaces} onSelect={placeSelectHandler} />;
 }

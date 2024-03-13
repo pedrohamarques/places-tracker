@@ -9,9 +9,10 @@ import { FetchedFormattedPlaceProps } from '@typings/data';
 
 type PlacesListProps = {
    places: FetchedFormattedPlaceProps[];
+   onSelect: (id: number) => void;
 };
 
-export function PlacesList({ places }: PlacesListProps) {
+export function PlacesList({ places, onSelect }: PlacesListProps) {
    if (!places || places.length === 0) {
       return (
          <View style={styles.fallbackContainer}>
@@ -28,7 +29,7 @@ export function PlacesList({ places }: PlacesListProps) {
          data={places}
          keyExtractor={item => String(item.id)}
          renderItem={({ item }) => (
-            <PlaceItem place={item} onSelect={() => {}} />
+            <PlaceItem place={item} onSelect={() => onSelect(item.id)} />
          )}
       />
    );

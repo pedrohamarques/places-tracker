@@ -21,6 +21,10 @@ export function useAllPlacesScreen() {
       navigation.navigate(StackRoutes.ADD_PLACES);
    }
 
+   function placeSelectHandler(id: number) {
+      navigation.navigate(StackRoutes.PLACE_DETAILS, { placeId: id });
+   }
+
    useEffect(() => {
       async function loadPlaces() {
          const places = await fetchPlaces();
@@ -34,6 +38,7 @@ export function useAllPlacesScreen() {
 
    return {
       headerButtonHandler,
+      placeSelectHandler,
       loadedPlaces,
    };
 }

@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import AllPlacesScreen from '@screens/all-places';
 import AddPlaceScreen from '@screens/add-place';
 import MapScreen from '@screens/map';
+import PlaceDetailsScreen from '@screens/place-details';
 
 import { Colors } from '@constants/colors';
 
@@ -36,6 +37,14 @@ export function Routes() {
                }}
             />
             <Stack.Screen name={StackRoutes.MAP} component={MapScreen} />
+            <Stack.Screen
+               name={StackRoutes.PLACE_DETAILS}
+               component={PlaceDetailsScreen}
+               options={{
+                  title: 'Loading place...',
+                  headerBackVisible: false,
+               }}
+            />
          </Stack.Navigator>
       </NavigationContainer>
    );
