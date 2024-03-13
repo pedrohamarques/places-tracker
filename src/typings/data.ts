@@ -43,3 +43,12 @@ export type FetchedFormattedPlaceProps = {
    };
    title: string;
 };
+
+export type PlaceDetailsProps = {
+   id: number;
+   imageUri: string;
+   address: string;
+   lat: string;
+   Lng: string;
+   title: string;
+};
