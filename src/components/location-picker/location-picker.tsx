@@ -27,7 +27,7 @@ export function LocationPicker({ onLocation }: LocationPickerProps) {
                <>
                   <MapView
                      style={styles.map}
-                     initialRegion={{
+                     region={{
                         latitude: pickedLocation.lat,
                         longitude: pickedLocation.lng,
                         latitudeDelta: DELTA_VARIATION,
