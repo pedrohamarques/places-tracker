@@ -1,9 +1,8 @@
-import type { AddressProps, FullLocationProps } from '@typings/data';
+import type { FullLocationProps } from '@typings/data';
 
 export default class Place {
    title: string;
    imageUri: string;
-   address: AddressProps | undefined;
    location: FullLocationProps | null;
    id: string;
    constructor(
@@ -13,7 +12,6 @@ export default class Place {
    ) {
       (this.imageUri = imageUri),
          (this.title = title),
-         (this.address = location?.address),
          (this.location = location),
          (this.id = new Date().toString() + Math.random().toString());
    }

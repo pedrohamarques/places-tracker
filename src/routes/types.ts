@@ -4,7 +4,7 @@ export type RoutesParams = {
    [StackRoutes.ALL_PLACES]: {
       place: Place;
    };
-   [StackRoutes.ADD_PLACES]: {
+   [StackRoutes.ADD_PLACES]?: {
       pickedLat: number;
       pickedLng: number;
    };
