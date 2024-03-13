@@ -32,3 +32,14 @@ export type AddressProps = {
 export type FullLocationProps = Location & {
    address?: AddressProps;
 };
+
+export type FetchedFormattedPlaceProps = {
+   id: number;
+   imageUri: string;
+   location: {
+      address: string;
+      lat: string;
+      lng: string;
+   };
+   title: string;
+};

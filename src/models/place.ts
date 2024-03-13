@@ -4,12 +4,12 @@ export default class Place {
    title: string;
    imageUri: string;
    location: FullLocationProps | null;
-   id?: string;
+   id?: number;
    constructor(
       title: string,
       imageUri: string,
       location: FullLocationProps | null,
-      id?: string,
+      id?: number,
    ) {
       (this.imageUri = imageUri),
          (this.title = title),
