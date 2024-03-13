@@ -48,7 +48,7 @@ export type PlaceDetailsProps = {
    id: number;
    imageUri: string;
    address: string;
-   lat: string;
-   Lng: string;
+   lat: number;
+   Lng: number;
    title: string;
 };
