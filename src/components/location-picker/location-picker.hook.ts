@@ -1,17 +1,23 @@
-import { Location } from '@typings/data';
+import { useState } from 'react';
+import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
    PermissionStatus,
    getCurrentPositionAsync,
    useForegroundPermissions,
 } from 'expo-location';
-import { useState } from 'react';
-import { Alert } from 'react-native';
+
+import type { Location } from '@typings/data';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { type RoutesParams, StackRoutes } from '@routes/types';
 
 export function useLocationPicker() {
    const [locationPermissionInformation, requestPermission] =
       useForegroundPermissions();
 
    const [pickedLocation, setPickedLocation] = useState<Location | null>(null);
+
+   const navigation = useNavigation<NativeStackNavigationProp<RoutesParams>>();
 
    async function verifyPermissions() {
       if (
@@ -46,7 +52,10 @@ export function useLocationPicker() {
       });
    }
 
-   function pickOnMapHandler() {}
+   function pickOnMapHandler() {
+      navigation.navigate(StackRoutes.MAP);
+   }
+
    return {
       getLocationHandler,
       pickOnMapHandler,
