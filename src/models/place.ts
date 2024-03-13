@@ -4,15 +4,16 @@ export default class Place {
    title: string;
    imageUri: string;
    location: FullLocationProps | null;
-   id: string;
+   id?: string;
    constructor(
       title: string,
       imageUri: string,
       location: FullLocationProps | null,
+      id?: string,
    ) {
       (this.imageUri = imageUri),
          (this.title = title),
          (this.location = location),
-         (this.id = new Date().toString() + Math.random().toString());
+         (this.id = id);
    }
 }

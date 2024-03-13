@@ -1,9 +1,5 @@
-import type Place from '@models/place';
-
 export type RoutesParams = {
-   [StackRoutes.ALL_PLACES]: {
-      place: Place;
-   };
+   [StackRoutes.ALL_PLACES]: undefined;
    [StackRoutes.ADD_PLACES]?: {
       pickedLat: number;
       pickedLng: number;
