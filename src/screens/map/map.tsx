@@ -17,9 +17,13 @@ export function MapScreen({ navigation }: MapScreenNavigationProps) {
       selectedLocation,
       selectLocationHandler,
       savePickedLocationHandler,
+      initialLocation,
    } = useMapScreen();
 
    useLayoutEffect(() => {
+      if (initialLocation) {
+         return;
+      }
       navigation.setOptions({
          headerRight: ({ tintColor }) => (
             <IconButton
@@ -30,7 +34,7 @@ export function MapScreen({ navigation }: MapScreenNavigationProps) {
             />
          ),
       });
-   }, [navigation, savePickedLocationHandler]);
+   }, [navigation, savePickedLocationHandler, initialLocation]);
 
    return (
       <MapView
