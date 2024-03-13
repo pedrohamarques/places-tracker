@@ -13,6 +13,7 @@ module.exports = function (api) {
                   '@typings': './src/typings',
                   '@routes': './src/routes',
                   '@constants': './src/constants',
+                  '@utils': './src/utils',
                },
             },
          ],
