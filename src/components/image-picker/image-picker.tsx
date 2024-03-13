@@ -1,8 +1,11 @@
 import React from 'react';
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
+import { Colors } from '@constants/colors';
+
+import { OutlineButton } from '@components/ui/outline-button';
 
 import { useImagePicker } from './image-picker.hook';
-import { Colors } from '@constants/colors';
 
 export function ImagePicker() {
    const { takeImageHandler, pickedImage } = useImagePicker();
@@ -15,7 +18,9 @@ export function ImagePicker() {
                <Text> No image taken yet.</Text>
             )}
          </View>
-         <Button title='Take Image' onPress={takeImageHandler} />
+         <OutlineButton icon='camera' onPress={takeImageHandler}>
+            Take Image
+         </OutlineButton>
       </View>
    );
 }
