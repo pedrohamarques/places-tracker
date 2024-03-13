@@ -1,4 +1,4 @@
-import { Location } from '@typings/data';
+import { AddressProps, Location } from '@typings/data';
 
 function formatToDMS(coord: number) {
    const absolute = Math.abs(coord);
@@ -21,4 +21,11 @@ export function formatCoordinate({ lat, lng }: Location) {
       lat: `${latCoordinate} ${latDirection}`,
       lng: `${lngCoordinate} ${lngDirection}`,
    };
+}
+
+export function formatAddress(address?: AddressProps) {
+   if (address) {
+      return `${address.house_number ? `${address.house_number} ` : ''}${address?.road}, ${address?.city} ${address?.state} ${address?.postcode}, ${address?.country}`;
+   }
+   return 'Not available.';
 }
