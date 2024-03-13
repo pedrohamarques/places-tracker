@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import AllPlacesScreen from '@screens/all-places';
 import AddPlaceScreen from '@screens/add-place';
+import MapScreen from '@screens/map';
 
 import { Colors } from '@constants/colors';
 
@@ -34,6 +35,7 @@ export function Routes() {
                   title: 'Add a new place',
                }}
             />
+            <Stack.Screen name={StackRoutes.MAP} component={MapScreen} />
          </Stack.Navigator>
       </NavigationContainer>
    );
