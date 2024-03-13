@@ -8,10 +8,10 @@ import { Colors } from '@constants/colors';
 
 import { useLocationPicker } from './location-picker.hook';
 
-import type { Location } from '@typings/data';
+import type { FullLocationProps } from '@typings/data';
 
 type LocationPickerProps = {
-   onLocation: (location: Location) => void;
+   onLocation: (location: FullLocationProps) => void;
 };
 
 export function LocationPicker({ onLocation }: LocationPickerProps) {

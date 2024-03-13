@@ -12,12 +12,14 @@ import {
    useForegroundPermissions,
 } from 'expo-location';
 
-import type { Location } from '@typings/data';
+import { useRequests } from '@services/requests';
+
+import type { FullLocationProps } from '@typings/data';
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { type RoutesParams, StackRoutes } from '@routes/types';
 
 type useLocationPickerProps = {
-   onLocation: (location: Location) => void;
+   onLocation: (location: FullLocationProps) => void;
 };
 
 export function useLocationPicker({ onLocation }: useLocationPickerProps) {
@@ -25,10 +27,13 @@ export function useLocationPicker({ onLocation }: useLocationPickerProps) {
    const [locationPermissionInformation, requestPermission] =
       useForegroundPermissions();
 
-   const [pickedLocation, setPickedLocation] = useState<Location | null>(null);
+   const [pickedLocation, setPickedLocation] =
+      useState<FullLocationProps | null>(null);
 
    const navigation = useNavigation<NativeStackNavigationProp<RoutesParams>>();
    const route = useRoute<RouteProp<RoutesParams, StackRoutes.ADD_PLACES>>();
+
+   const { getAddress } = useRequests();
 
    async function verifyPermissions() {
       if (
@@ -41,7 +46,7 @@ export function useLocationPicker({ onLocation }: useLocationPickerProps) {
          locationPermissionInformation?.status === PermissionStatus.DENIED
       ) {
          Alert.alert(
-            'Insufficient Permissiones!',
+            'Insufficient Permissions!',
             'You need to grant location permission to use this app.',
          );
          return false;
@@ -78,9 +83,16 @@ export function useLocationPicker({ onLocation }: useLocationPickerProps) {
    }, [route, isFocused]);
 
    useEffect(() => {
-      if (pickedLocation) {
-         onLocation(pickedLocation);
+      async function handleLocation() {
+         if (pickedLocation) {
+            const address = await getAddress(
+               pickedLocation.lat,
+               pickedLocation.lng,
+            );
+            onLocation({ ...pickedLocation, address });
+         }
       }
+      handleLocation();
    }, [pickedLocation, onLocation]);
 
    return {
