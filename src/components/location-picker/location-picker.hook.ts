@@ -1,6 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {
+   RouteProp,
+   useNavigation,
+   useRoute,
+   useIsFocused,
+} from '@react-navigation/native';
 import {
    PermissionStatus,
    getCurrentPositionAsync,
@@ -8,16 +13,22 @@ import {
 } from 'expo-location';
 
 import type { Location } from '@typings/data';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { type RoutesParams, StackRoutes } from '@routes/types';
 
-export function useLocationPicker() {
+type useLocationPickerProps = {
+   onLocation: (location: Location) => void;
+};
+
+export function useLocationPicker({ onLocation }: useLocationPickerProps) {
+   const isFocused = useIsFocused();
    const [locationPermissionInformation, requestPermission] =
       useForegroundPermissions();
 
    const [pickedLocation, setPickedLocation] = useState<Location | null>(null);
 
    const navigation = useNavigation<NativeStackNavigationProp<RoutesParams>>();
+   const route = useRoute<RouteProp<RoutesParams, StackRoutes.ADD_PLACES>>();
 
    async function verifyPermissions() {
       if (
@@ -55,6 +66,22 @@ export function useLocationPicker() {
    function pickOnMapHandler() {
       navigation.navigate(StackRoutes.MAP);
    }
+
+   useEffect(() => {
+      if (isFocused && route.params) {
+         const mapPickedLocation = {
+            lat: route.params.pickedLat,
+            lng: route.params.pickedLng,
+         };
+         setPickedLocation(mapPickedLocation);
+      }
+   }, [route, isFocused]);
+
+   useEffect(() => {
+      if (pickedLocation) {
+         onLocation(pickedLocation);
+      }
+   }, [pickedLocation, onLocation]);
 
    return {
       getLocationHandler,

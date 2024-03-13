@@ -6,7 +6,11 @@ import {
 import { useState } from 'react';
 import { Alert } from 'react-native';
 
-export function useImagePicker() {
+type useImagePickerProps = {
+   onImage: (imageUri: string) => void;
+};
+
+export function useImagePicker({ onImage }: useImagePickerProps) {
    const [cameraPermissionInformation, requestPermission] =
       useCameraPermissions();
    const [pickedImage, setPickedImage] = useState<string | null>(null);
@@ -43,6 +47,7 @@ export function useImagePicker() {
       });
 
       setPickedImage(image.assets![0].uri);
+      onImage(image.assets![0].uri);
    }
 
    return {

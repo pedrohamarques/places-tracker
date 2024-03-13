@@ -5,11 +5,18 @@ import { Colors } from '@constants/colors';
 
 import { ImagePicker } from '@components/image-picker';
 import { LocationPicker } from '@components/location-picker';
+import { Button } from '@components/ui/button';
 
 import { usePlaceForm } from './place-form.hook';
 
 export function PlaceForm() {
-   const { changeTitleHandler, enteredTitle } = usePlaceForm();
+   const {
+      changeTitleHandler,
+      enteredTitle,
+      takeImageHandler,
+      takeLocationHandler,
+      savePlaceHandler,
+   } = usePlaceForm();
    return (
       <ScrollView style={styles.form}>
          <View>
@@ -20,8 +27,9 @@ export function PlaceForm() {
                style={styles.input}
             />
          </View>
-         <ImagePicker />
-         <LocationPicker />
+         <ImagePicker onImage={takeImageHandler} />
+         <LocationPicker onLocation={takeLocationHandler} />
+         <Button onPress={savePlaceHandler}>Add Place</Button>
       </ScrollView>
    );
 }

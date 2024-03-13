@@ -7,8 +7,12 @@ import { OutlineButton } from '@components/ui/outline-button';
 
 import { useImagePicker } from './image-picker.hook';
 
-export function ImagePicker() {
-   const { takeImageHandler, pickedImage } = useImagePicker();
+type ImagePickerProps = {
+   onImage: (imageUri: string) => void;
+};
+
+export function ImagePicker({ onImage }: ImagePickerProps) {
+   const { takeImageHandler, pickedImage } = useImagePicker({ onImage });
    return (
       <View>
          <View style={styles.imagePreview}>

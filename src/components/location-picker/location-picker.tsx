@@ -1,23 +1,48 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 
 import { OutlineButton } from '@components/ui/outline-button';
 
 import { Colors } from '@constants/colors';
 
 import { useLocationPicker } from './location-picker.hook';
-import { formatCoordinate } from '@utils/location';
 
-export function LocationPicker() {
+import type { Location } from '@typings/data';
+
+type LocationPickerProps = {
+   onLocation: (location: Location) => void;
+};
+
+export function LocationPicker({ onLocation }: LocationPickerProps) {
    const { getLocationHandler, pickOnMapHandler, pickedLocation } =
-      useLocationPicker();
+      useLocationPicker({ onLocation });
+
+   const DELTA_VARIATION = 0.005;
+
    return (
       <View>
          <View style={styles.mapPreview}>
             {pickedLocation ? (
                <>
-                  <Text>Latitude: {formatCoordinate(pickedLocation).lat}</Text>
-                  <Text>Longitude: {formatCoordinate(pickedLocation).lng}</Text>
+                  <MapView
+                     style={styles.map}
+                     initialRegion={{
+                        latitude: pickedLocation.lat,
+                        longitude: pickedLocation.lng,
+                        latitudeDelta: DELTA_VARIATION,
+                        longitudeDelta: DELTA_VARIATION,
+                     }}
+                     zoomEnabled={false}
+                     rotateEnabled={false}
+                     scrollEnabled={false}>
+                     <Marker
+                        coordinate={{
+                           latitude: pickedLocation.lat,
+                           longitude: pickedLocation.lng,
+                        }}
+                     />
+                  </MapView>
                </>
             ) : (
                <Text>No location saved yet.</Text>
@@ -49,5 +74,9 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
+   },
+   map: {
+      width: '100%',
+      height: 200,
    },
 });
