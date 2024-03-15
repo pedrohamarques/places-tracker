@@ -20,7 +20,7 @@ export function IconButton({
    return (
       <Pressable
          onPress={onPress}
-         testID={testID}
+         testID={`${testID}.pressable`}
          style={({ pressed }) => [styles.button, pressed && styles.pressed]}>
          <Ionicons name={icon} size={size} color={color} />
       </Pressable>

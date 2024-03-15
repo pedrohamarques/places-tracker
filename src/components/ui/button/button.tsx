@@ -15,7 +15,7 @@ export function Button({
    return (
       <Pressable
          onPress={onPress}
-         testID={testID}
+         testID={`${testID}.pressable`}
          style={({ pressed }) => [styles.button, pressed && styles.pressed]}>
          <Text style={styles.text}>{children}</Text>
       </Pressable>
