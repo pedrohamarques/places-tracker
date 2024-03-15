@@ -7,14 +7,24 @@ import { FetchedFormattedPlaceProps } from '@typings/data';
 type PlaceItemProps = {
    place: FetchedFormattedPlaceProps;
    onSelect: () => void;
+   testID?: string;
 };
 
-export function PlaceItem({ place, onSelect }: PlaceItemProps) {
+export function PlaceItem({
+   place,
+   onSelect,
+   testID = 'components.place-list.components.place-item',
+}: PlaceItemProps) {
    return (
       <Pressable
          onPress={onSelect}
+         testID={`${testID}.pressable`}
          style={({ pressed }) => [styles.item, pressed && styles.pressed]}>
-         <Image source={{ uri: place.imageUri }} style={styles.image} />
+         <Image
+            source={{ uri: place.imageUri }}
+            style={styles.image}
+            testID='components.place-list.components.place-item.image'
+         />
          <View style={styles.info}>
             <Text style={styles.title}>{place.title}</Text>
             <Text style={styles.address}>{place.location?.address}</Text>

@@ -31,10 +31,17 @@ export function PlaceForm({ onCreatePlace }: PlaceFormProps) {
                onChangeText={event => changeTitleHandler(event)}
                value={enteredTitle}
                style={styles.input}
+               testID='components.place-form.text-input'
             />
          </View>
-         <ImagePicker onImage={takeImageHandler} />
-         <LocationPicker onLocation={takeLocationHandler} />
+         <ImagePicker
+            onImage={takeImageHandler}
+            testID='components.place-form.image-picker'
+         />
+         <LocationPicker
+            onLocation={takeLocationHandler}
+            testID='components.place-form.location-picker'
+         />
          <Button onPress={savePlaceHandler}>Add Place</Button>
       </ScrollView>
    );
