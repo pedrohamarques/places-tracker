@@ -9,15 +9,23 @@ import { useImagePicker } from './image-picker.hook';
 
 type ImagePickerProps = {
    onImage: (imageUri: string) => void;
+   testID?: string;
 };
 
-export function ImagePicker({ onImage }: ImagePickerProps) {
+export function ImagePicker({
+   onImage,
+   testID = 'components.image-picker',
+}: ImagePickerProps) {
    const { takeImageHandler, pickedImage } = useImagePicker({ onImage });
    return (
-      <View>
+      <View testID={testID}>
          <View style={styles.imagePreview}>
             {pickedImage ? (
-               <Image source={{ uri: pickedImage }} style={styles.image} />
+               <Image
+                  source={{ uri: pickedImage }}
+                  style={styles.image}
+                  testID='components.image-picker.Image'
+               />
             ) : (
                <Text> No image taken yet.</Text>
             )}

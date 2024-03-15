@@ -1,10 +1,10 @@
+import { useState } from 'react';
+import { Alert } from 'react-native';
 import {
    launchCameraAsync,
    useCameraPermissions,
    PermissionStatus,
 } from 'expo-image-picker';
-import { useState } from 'react';
-import { Alert } from 'react-native';
 
 type useImagePickerProps = {
    onImage: (imageUri: string) => void;
