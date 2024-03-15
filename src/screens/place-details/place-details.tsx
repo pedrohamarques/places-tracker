@@ -34,7 +34,11 @@ export function PlaceDetailsScreen({
 
    return (
       <ScrollView>
-         <Image style={styles.image} source={{ uri: loadedPlace.imageUri }} />
+         <Image
+            style={styles.image}
+            source={{ uri: loadedPlace.imageUri }}
+            testID='screens.place-details.image'
+         />
          <View style={styles.locationContainer}>
             <View style={styles.addressContainer}>
                <Text style={styles.address}>{loadedPlace?.address}</Text>
