@@ -12,16 +12,20 @@ import type { FullLocationProps } from '@typings/data';
 
 type LocationPickerProps = {
    onLocation: (location: FullLocationProps) => void;
+   testID?: string;
 };
 
-export function LocationPicker({ onLocation }: LocationPickerProps) {
+export function LocationPicker({
+   onLocation,
+   testID = 'components.location-picker',
+}: LocationPickerProps) {
    const { getLocationHandler, pickOnMapHandler, pickedLocation } =
       useLocationPicker({ onLocation });
 
    const DELTA_VARIATION = 0.005;
 
    return (
-      <View>
+      <View testID={testID}>
          <View style={styles.mapPreview}>
             {pickedLocation ? (
                <>
@@ -35,7 +39,8 @@ export function LocationPicker({ onLocation }: LocationPickerProps) {
                      }}
                      zoomEnabled={false}
                      rotateEnabled={false}
-                     scrollEnabled={false}>
+                     scrollEnabled={false}
+                     testID='components.location-picker.map-view'>
                      <Marker
                         coordinate={{
                            latitude: pickedLocation.lat,
