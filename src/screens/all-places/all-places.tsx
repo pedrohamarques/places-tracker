@@ -29,5 +29,11 @@ export function AllPlacesScreen({
       });
    }, []);
 
-   return <PlacesList places={loadedPlaces} onSelect={placeSelectHandler} />;
+   return (
+      <PlacesList
+         places={loadedPlaces}
+         onSelect={placeSelectHandler}
+         testID='screens.all-places.places-list'
+      />
+   );
 }
