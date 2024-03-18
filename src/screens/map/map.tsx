@@ -40,7 +40,8 @@ export function MapScreen({ navigation }: MapScreenNavigationProps) {
       <MapView
          initialRegion={region}
          style={styles.map}
-         onPress={selectLocationHandler}>
+         onPress={selectLocationHandler}
+         testID='screens.map.map-view'>
          {selectedLocation && (
             <Marker
                title='Picked location'
