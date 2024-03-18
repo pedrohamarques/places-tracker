@@ -13,9 +13,13 @@ import type Place from '@models/place';
 
 type PlaceFormProps = {
    onCreatePlace: (data: Place) => void;
+   testID?: string;
 };
 
-export function PlaceForm({ onCreatePlace }: PlaceFormProps) {
+export function PlaceForm({
+   onCreatePlace,
+   testID = 'components.place-form',
+}: PlaceFormProps) {
    const {
       changeTitleHandler,
       enteredTitle,
@@ -24,7 +28,7 @@ export function PlaceForm({ onCreatePlace }: PlaceFormProps) {
       savePlaceHandler,
    } = usePlaceForm({ onCreatePlace });
    return (
-      <ScrollView style={styles.form}>
+      <ScrollView style={styles.form} testID={testID}>
          <View>
             <Text style={styles.label}>Title</Text>
             <TextInput
